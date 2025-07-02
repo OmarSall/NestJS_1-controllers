@@ -50,7 +50,7 @@ export class ArticlesService {
     }
     this.articles[articleIndex] = {
       ...this.articles[articleIndex],
-      ...article
+      ...article,
     };
 
     return this.articles[articleIndex];
