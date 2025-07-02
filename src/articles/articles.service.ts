@@ -2,20 +2,23 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Article } from './article';
 import { ArticleDto } from './articles.dto';
 import { LoggerService } from '../logger/logger.service';
+import { UniqueIdService } from '../unique-id/unique-id.service';
 
 @Injectable()
 export class ArticlesService {
-  constructor(private readonly loggerService: LoggerService) {}
+  constructor(
+    private readonly loggerService: LoggerService,
+    private readonly uniqueIdService: UniqueIdService,
+  ) {}
 
   private articles: Article[] = [];
-  private nextCreatedArticleId: number = 1;
 
   getAll() {
     this.loggerService.log('Getting a list of all articles');
     return this.articles;
   }
 
-  getById(id: number) {
+  getById(id: string) {
     this.loggerService.log('Getting a list of all articles');
     const article = this.articles.find((article) => article.id === id);
 
@@ -30,14 +33,14 @@ export class ArticlesService {
   create(article: ArticleDto) {
     this.loggerService.log('Creating new article');
     const newArticle = {
-      id: this.nextCreatedArticleId++,
+      id: this.uniqueIdService.generate(),
       ...article,
     };
     this.articles.push(newArticle);
     return newArticle;
   }
 
-  update(id: number, article: ArticleDto) {
+  update(id: string, article: ArticleDto) {
     this.loggerService.log('Updating an article');
     const articleIndex = this.articles.findIndex(
       (article) => article.id === id,
@@ -56,7 +59,7 @@ export class ArticlesService {
     return this.articles[articleIndex];
   }
 
-  delete(id: number) {
+  delete(id: string) {
     this.loggerService.log('Deleting an article');
     const articleIndex = this.articles.findIndex(
       (article) => article.id === id,

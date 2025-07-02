@@ -26,17 +26,17 @@ export class ArticleController {
   }
 
   @Get(':id')
-  getById(@Param('id', ParseIntPipe) id: number) {
+  getById(@Param('id') id: string) {
     return this.articlesService.getById(id);
   }
 
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() article: ArticleDto) {
+  update(@Param('id') id: string, @Body() article: ArticleDto) {
     return this.articlesService.update(id, article);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
+  delete(@Param('id') id: string) {
     return this.articlesService.delete(id);
   }
 }
