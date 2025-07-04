@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class UniqueIdService {
-  generate(): string {
+  generateIdV4(): string {
     return uuidv4();
   }
 }

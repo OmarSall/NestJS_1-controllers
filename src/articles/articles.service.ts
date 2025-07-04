@@ -33,7 +33,7 @@ export class ArticlesService {
   create(article: ArticleDto) {
     this.loggerService.log('Creating new article');
     const newArticle = {
-      id: this.uniqueIdService.generate(),
+      id: this.uniqueIdService.generateIdV4(),
       ...article,
     };
     this.articles.push(newArticle);
