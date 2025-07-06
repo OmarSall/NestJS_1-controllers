@@ -3,10 +3,12 @@ import { Article } from './article';
 import { ArticleDto } from './articles.dto';
 import { LoggerService } from '../logger/logger.service';
 import { UniqueIdService } from '../unique-id/unique-id.service';
+import { PrismaService } from '../database/prisma.service';
 
 @Injectable()
 export class ArticlesService {
   constructor(
+    private readonly prismaService: PrismaService,
     private readonly loggerService: LoggerService,
     private readonly uniqueIdService: UniqueIdService,
   ) {}
